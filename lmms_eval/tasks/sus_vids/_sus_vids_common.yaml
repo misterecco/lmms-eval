@@ -1,0 +1,18 @@
+dataset_path: sus-vids/sus-vids-v0.0
+dataset_kwargs:
+  token: True
+  video: True
+  cache_dir: sus_vids
+task: "sus_vids"
+test_split: test
+output_type: generate_until
+doc_to_visual: !function utils.sus_vids_doc_to_visual
+doc_to_text: !function utils.sus_vids_doc_to_text
+doc_to_target: "reference"
+generation_kwargs:
+  max_new_tokens: 1024
+
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: ""

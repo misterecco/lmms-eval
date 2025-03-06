@@ -1,0 +1,8 @@
+task: "sus_vids_90_max_frames"
+include: _sus_vids_common.yaml
+lmms_eval_specific_kwargs:
+  default:
+    prompt_settings: 90-frames-only-frames
+model_specific_generation_kwargs:
+  default:
+    fps: 1.5

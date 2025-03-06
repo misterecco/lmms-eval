@@ -3,6 +3,7 @@ import re
 from copy import deepcopy
 from dataclasses import dataclass
 from enum import Enum
+from loguru import logger as eval_logger
 from pathlib import Path
 from typing import List, Optional
 
@@ -11,15 +12,7 @@ import yaml
 try:
     from reka import ChatMessage
     from reka.client import Reka
-except ImportError:
-    eval_logger.warning("Reka is not installed, please install it by `pip install reka-api`")
-
-from loguru import logger as eval_logger
-
-try:
-    from reka import ChatMessage
-    from reka.client import Reka
-except ImportError:
+except ModuleNotFoundError:
     eval_logger.warning("Reka is not installed, please install it by `pip install reka-api`")
 
 REKA_API_KEY = os.getenv("REKA_API_KEY", "YOUR_API_KEY")
@@ -80,7 +73,6 @@ class Example:
     prompt: str
     reference: str
     media_filename: str
-    media_url: str
 
     # The fields below are not stored in the dataset, but are populated by this script.
     generation: Optional[str] = None

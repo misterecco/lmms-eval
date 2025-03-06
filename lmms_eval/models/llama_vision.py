@@ -27,14 +27,14 @@ DEFAULT_IMAGE_TOKEN = "<|image|>"
 class LlamaVision(lmms):
     def __init__(
         self,
-        pretrained: str = "meta-llama/Llama-3.2-11B-Vision",
+        pretrained: str = "meta-llama/Llama-3.2-11B-Vision-Instruct",
         revision: str = "main",
         device: str = "cuda",
         dtype: Optional[Union[str, torch.dtype]] = "auto",
         batch_size: int = 1,
         trust_remote_code: Optional[bool] = False,
         attn_implementation: Optional[str] = None,
-        device_map: str = "",
+        device_map: str = "auto",
         max_frames_num: Optional[int] = 32,
         **kwargs,
     ) -> None:
@@ -51,7 +51,6 @@ class LlamaVision(lmms):
             self.device_map = device_map
         if isinstance(dtype, str) and dtype != "auto":
             dtype = getattr(torch, dtype)
-
         self.max_frames_num = max_frames_num
         self._model = MllamaForConditionalGeneration.from_pretrained(pretrained, revision=revision, torch_dtype=dtype, device_map=self.device_map, trust_remote_code=trust_remote_code, attn_implementation=attn_implementation)
         self.model.eval()
